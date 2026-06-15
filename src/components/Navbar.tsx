@@ -3,9 +3,10 @@ import { Menu, X, Sparkles } from "lucide-react";
 
 interface NavbarProps {
   onOpenBooking: () => void;
+  onOpenMyBookings: () => void;
 }
 
-export default function Navbar({ onOpenBooking }: NavbarProps) {
+export default function Navbar({ onOpenBooking, onOpenMyBookings }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -69,7 +70,14 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
           </nav>
 
           {/* Booking CTA Button */}
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center space-x-3">
+            <button
+              onClick={onOpenMyBookings}
+              className="text-[#4A7C7C] hover:text-[#375E5E] text-xs font-semibold uppercase tracking-wider px-4 py-2.5 rounded-full border border-[#4A7C7C]/30 hover:bg-[#4A7C7C]/5 transition duration-300 cursor-pointer"
+              id="nav-my-bookings-btn"
+            >
+              My Bookings
+            </button>
             <button
               onClick={onOpenBooking}
               className="inline-flex items-center justify-center px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase text-[#F5F0E8] bg-[#4A7C7C] hover:bg-[#375E5E] transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 cursor-pointer"
@@ -111,7 +119,16 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
               {link.name}
             </a>
           ))}
-          <div className="pt-4 px-4">
+          <div className="pt-4 px-4 space-y-2">
+            <button
+              onClick={() => {
+                setIsOpen(false);
+                onOpenMyBookings();
+              }}
+              className="flex w-full items-center justify-center px-6 py-3 rounded-full text-sm font-semibold tracking-wider uppercase text-[#4A7C7C] border border-[#4A7C7C]/30 bg-white hover:bg-gray-50 transition cursor-pointer"
+            >
+              My Bookings
+            </button>
             <button
               onClick={() => {
                 setIsOpen(false);

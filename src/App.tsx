@@ -14,11 +14,13 @@ import Footer from "./components/Footer";
 import { Treatment } from "./types";
 import TreatmentDetailModal from "./components/TreatmentDetailModal";
 import BookingModal from "./components/BookingModal";
-import ActiveBookings from "./components/ActiveBookings";
+import MyBookingsModal from "./components/MyBookingsModal";
+import ToastContainer from "./components/Toast";
 
 export default function App() {
   const [selectedTreatment, setSelectedTreatment] = useState<Treatment | null>(null);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [isMyBookingsOpen, setIsMyBookingsOpen] = useState(false);
   const [preSelectedTreatmentId, setPreSelectedTreatmentId] = useState("");
 
   const handleOpenBooking = (treatmentId: string = "") => {
@@ -41,13 +43,13 @@ export default function App() {
 
       <div className="relative z-10">
         {/* Sticky Global Navigation */}
-        <Navbar onOpenBooking={() => handleOpenBooking("")} />
+        <Navbar 
+          onOpenBooking={() => handleOpenBooking("")} 
+          onOpenMyBookings={() => setIsMyBookingsOpen(true)} 
+        />
 
         {/* Home Hero Introduction */}
         <Hero onOpenBooking={() => handleOpenBooking("")} />
-
-        {/* Dynamic active user appointments reminder (if any booked in current browser session) */}
-        <ActiveBookings />
 
         {/* Aggregated Reviews & Trust Rating stats */}
         <TrustBar />
@@ -89,6 +91,13 @@ export default function App() {
         onClose={() => setIsBookingOpen(false)} 
         preSelectedTreatmentId={preSelectedTreatmentId} 
       />
+
+      <MyBookingsModal 
+        isOpen={isMyBookingsOpen} 
+        onClose={() => setIsMyBookingsOpen(false)} 
+      />
+
+      <ToastContainer />
     </div>
   );
 }
