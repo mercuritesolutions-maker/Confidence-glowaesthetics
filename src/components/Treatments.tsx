@@ -115,7 +115,7 @@ export default function Treatments({ onSelectTreatment, onBookTreatment }: Treat
         {/* Bottom notes */}
         <div className="mt-16 text-center select-none">
           <p className="text-xs text-[#6B7152] max-w-lg mx-auto leading-relaxed">
-            *Custom dual-therapy combinations available upon individual assessment. Speak with our clinical specialist about pairing chemical exfoliating peels with medical microneedling.
+            *Custom dual-therapy combination plans available upon individual assessment. Speak with our clinical specialist about pairing laser skin rejuvenation with custom vascular or pigmentation protocols.
           </p>
         </div>
       </div>

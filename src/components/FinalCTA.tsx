@@ -34,7 +34,7 @@ export default function FinalCTA({ onOpenBooking }: FinalCTAProps) {
           </h2>
           
           <p className="text-sm sm:text-base text-[#E5DFD4] max-w-xl mb-10 leading-relaxed font-sans">
-            Join other Leeds and Morley patients who have upgraded their skincare routines under expert NHS clinical supervision. Secure your appointment on Fresha instantly.
+            Join other local patients who have upgraded their skincare routines under expert NHS clinical supervision. Secure your reservation instantly online today.
           </p>
 
           {/* Book Online Now Button */}

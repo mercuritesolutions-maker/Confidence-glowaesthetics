@@ -50,159 +50,133 @@ export interface WorkingHour {
 
 export const TREATMENTS: Treatment[] = [
   {
-    id: "anti-wrinkle",
-    title: "Anti-Wrinkle Treatments",
-    description: "Premium, precise injections targeting lines and wrinkles for a smooth, naturally youthful expression.",
-    longDescription: "Our anti-wrinkle treatments represent the pinnacle of precise medical aesthetics. Administered strictly by our NHS-trained clinical specialist, this treatment utilizes premium, certified neuromodulators to temporarily relax targeted facial muscles responsible for dynamic expressions. This lets your skin rest and smooth out naturally, correcting lines with a refined touch that keeps dynamic movement looking beautiful, radiant, and absolutely genuine.",
-    priceRange: "From £150",
-    duration: "20 - 30 mins",
-    iconName: "Sparkles",
-    benefits: [
-      "Smoothes forehead wrinkles, frown lines, and delicate crow's feet",
-      "Saves dynamic facial movement for an expert, non-frozen look",
-      "Extremely comfortable, virtually painless micro-needles used",
-      "Results fully develop in 7 to 14 days and last up to 3-4 months"
-    ],
-    procedureSteps: [
-      "Detailed clinical consultation, facial anatomy analysis & medical mapping",
-      "Gentle skin preparation & deep sterilization of targeted muscle points",
-      "Ultra-precise micro-injections using premium grade clinical toxins",
-      "Comprehensive post-procedure guidance and complimentary 2-week follow-up call"
-    ],
-    bestSuitedFor: [
-      "Individuals noticing static forehead, frown, or smile lines at rest",
-      "Those desiring a more refreshed, active, less tired facial appearance",
-      "Patients seeking medical-grade safety standards led by an NHS clinician"
-    ]
-  },
-  {
-    id: "skin-boosters",
-    title: "Skin Booster",
-    description: "Deeply hydrating micro-injections (Seventy Hyal / Profhilo) that drench skin in hyaluronic acid for a soft, dewy glow.",
-    longDescription: "Unlike traditional fillers that simply add local contour volume, our premium Skin Boosters (utilizing world-class Seventy Hyal and Profhilo) act as an injectable moisturizer. By directly depositing high-concentration, ultra-pure hyaluronic acid into the dermal layers, we stimulate cellular receptors to increase natural collagen and elastin synthesis. This floods your entire face with deep, persistent hydration, leaving it intensely dewy, plump, and glowing.",
-    priceRange: "From £180",
-    duration: "30 - 45 mins",
-    iconName: "Droplet",
-    benefits: [
-      "Floods the dermis with deep, long-duration hydration",
-      "Improves overall skin creepiness, fine line texture, and laxity",
-      "Accelerates natural collagen and elastin production",
-      "Imparts cell-deep luminosity and a healthy bounce"
-    ],
-    procedureSteps: [
-      "In-depth assessment of dermal hydration levels and barrier thickness",
-      "Gentle cleansing and application of a medical-grade topical numbing cream",
-      "Precise bio-aesthetic point (BAP) micro-droplet deposits of pure Hyaluronic Acid",
-      "Soothing dermal massage to distribute hydration and cool clinical compress"
-    ],
-    bestSuitedFor: [
-      "Dehydrated, dull, or tired-looking skin showing signs of early aging",
-      "Those who want hydrated, plump skin without adding physical volume or altering facial contours",
-      "Anyone experiencing dryness that traditional topicals fail to resolve"
-    ]
-  },
-  {
-    id: "microneedling",
-    title: "Microneedling",
-    description: "Collagen induction therapy utilizing medicalgrade microneedles to improve scarring, texture, and pore size.",
-    longDescription: "Our medical-grade Microneedling treatment is a controlled collagen induction therapy. Using sterile, single-use surgical micro-needles, we create thousands of microscopic fractions in the epidermis. This triggers the skin's innate healing response, generating fresh fibroblasts, collagen, and elastin. Combined with our medical-grade recovery serums, it effectively remodels scarred tissue, refines coarse skin texture, and shrinks enlarged pores.",
-    priceRange: "From £95",
-    duration: "45 - 60 mins",
+    id: "laser-hair-removal",
+    title: "Laser Hair Removal",
+    description: "Medical-grade permanent reduction of unwanted facial and body hair for silky, long-lasting smoothness with absolute clinical safety.",
+    longDescription: "Say goodbye to daily shaving, painful waxing, and ingrown hairs. Our state-of-the-art laser system safely and selectively targets active hair follicles, emitting localized light energy to disable root growth at the source. Led by an experienced NHS-trained clinician, this procedure is adapted precisely to your skin type and hair density, ensuring highly comfortable treatments and permanent, beautifully smooth skin.",
+    priceRange: "From £40",
+    duration: "15 - 60 mins",
     iconName: "Grid",
     benefits: [
-      "Visibly reduces acne scars, post-inflammatory pigmentation, and age spots",
-      "Refines coarse skin texture and shrinks enlarged pores",
-      "Improves absorption efficiency of home skincare products by up to 300%",
-      "Safe and highly effective for all skin tones and Fitzpatricks"
+      "Permanent, clinically-proven reduction of active hair follicles",
+      "Prevents irritating razor bumps and painful ingrown hairs",
+      "Bespoke adjustable parameters for maximum skin safety",
+      "Suitable for a broad range of skin types and body areas"
     ],
     procedureSteps: [
-      "Double clinical cleanse and application of strong premium numbing cream for max comfort",
-      "Application of customized medical hyaluronic acid or brightening serum glide",
-      "Controlled needle passes with safe, sterilized motorized pen at target depths",
-      "Soothing application of a sterile sheet mask and advanced recovery cocktail"
+      "In-depth patch test, melanin mapping and custom parameter planning",
+      "Thorough skin sterilization and protective eye shield fitting",
+      "Step-by-step laser application paired with intelligent epidermal cooling",
+      "Post-treatment application of soothing physiological restorers and SPF 50"
     ],
     bestSuitedFor: [
-      "Patients looking to clear old acne scars, uneven pigment, or dark marks",
-      "Individuals experiencing uneven texture, coarse pores, or fine lines",
-      "Anyone seeking a completely drug-free dermal regeneration therapy"
+      "Individuals looking for a permanent release from shaving or waxing",
+      "Anyone suffering from recurrent folliculitis or painful ingrown hairs",
+      "Patients seeking professional-grade laser comfort under clinical guidance"
     ]
   },
   {
-    id: "chemical-peels",
-    title: "Chemical Peel",
-    description: "Advanced medical-grade exfoliating acids tailored to your skin concerns to lift dead cells and pigmentation.",
-    longDescription: "Ditch traditional harsh scrubs for our scientifically formulated clinical Peels. We carefully select specific combinations of glycolic, salicylic, lactic, or mandelic acids to match your biological skin threshold. By loosening the chemical bonds holding damaged, pigment-heavy cells together, our peeling therapy lifts dead skin buildup to reveal the healthy cells underneath.",
-    priceRange: "From £70",
+    id: "laser-skin-rejuvenation",
+    title: "Laser Skin Rejuvenation",
+    description: "Advanced non-invasive laser treatments designed to stimulate natural collagen, refine skin texture, and restore healthy bounce.",
+    longDescription: "Restore your skin's youthful radiance with our customized Laser Skin Rejuvenation protocol. Delivering controlled thermal pulses beneath the epidermis, we gently trigger your skin's natural healing cascade. This stimulates premium fibroblast activity, encouraging fresh collagen regeneration. This advanced non-ablative therapy refines uneven skin texture, softens static fine lines, and firms the skin network with virtually zero clinical downtime.",
+    priceRange: "From £120",
     duration: "30 - 45 mins",
+    iconName: "Sparkles",
+    benefits: [
+      "Stimulates deep natural collagen and elastin synthesis",
+      "Smoothing of skin micro-texture, fine lines, and mild surface irregularities",
+      "Extremely low downtime, allowing immediate return to routine",
+      "Restores a uniform, radiant aesthetic dewiness across the facial canvas"
+    ],
+    procedureSteps: [
+      "Comprehensive analysis of dermal thickness and texture planning",
+      "Deep clinical cleanse followed by skin sanitization",
+      "Precise, controlled energy passes over critical facial zones",
+      "Soothing custom recovery serum application and protective lipid seal"
+    ],
+    bestSuitedFor: [
+      "Early signs of skin laxity, fine lines, or superficial texture issues",
+      "Dull, tired-looking skin needing a powerful collagen-induction boost",
+      "Active professionals desiring visible dermal renewal with minimal recovery time"
+    ]
+  },
+  {
+    id: "pigmentation-treatments",
+    title: "Pigmentation Treatment",
+    description: "Precision laser therapy targeting sun damage, age spots, and uneven melanin patches for a beautifully unified skin tone.",
+    longDescription: "Achieve a clear, perfectly balanced complexion with our focused Pigmentation Treatments. Utilizing precision wavelength technology, we selectively target and break down excess localized melanin clusters associated with sun damage, solar lentigines, and age spots. Once fragmented, these pigment particles are naturally and safely resorbed through your body's immune system, leaving behind a beautifully uniform, bright skin texture.",
+    priceRange: "From £80",
+    duration: "20 - 45 mins",
     iconName: "Layers",
     benefits: [
-      "Brightens and evens out hyperpigmentation and sun damage",
-      "Unclogs congested pores, preventing breakouts and acne",
-      "Encourages cell turnover for smooth, baby-soft skin",
-      "Customizable depth from superficial to medium with minimal downtime"
+      "Fades stubborn sun spots, solar freckles, and pigmentation patches",
+      "Restores a unified, bright, and beautifully even-toned complexion",
+      "Highly precise targeting with zero damage to surrounding skin layers",
+      "Promotes faster cell turnover for refreshed dermal health"
     ],
     procedureSteps: [
-      "Thorough skin prep to remove lipids, excess oils, and balance skin pH",
-      "Bespoke application of the peeling acid blend, carefully monitored by the practitioner",
-      "Active neutralization and sterile water cooling rinse",
-      "Application of physiological lipids, barrier protection creams, and broad-spectrum SPF 50"
+      "Visual mapping and pigmentation assessment to verify lesion type",
+      "Double clinical skin preparation and gentle mechanical surface prep",
+      "Targeted laser pulses delivered directly to focused pigment points",
+      "Post-laser application of customized antioxidant serum, cooling gel, and SPF"
     ],
     bestSuitedFor: [
-      "Congested, dull, or acne-prone skin",
-      "Individuals struggling with pigment spots, sun-damage, or dark marks",
-      "Those looking for rapid skin brightening before a major event"
+      "Stubborn dark spots, solar sun spots, and patchy melanin accumulation",
+      "Those who want to replace muddy, uneven color with a clean glow",
+      "Patients preferring medical-grade non-surgical skin tone correction"
     ]
   },
   {
-    id: "skin-tag-removal",
-    title: "Skin Tag Removal",
-    description: "Safe, rapid, and hygienic clinical removal of skin tags, lesions, or milia with minimal healing times.",
-    longDescription: "Do not risk hazardous at-home remedies. Our skin tag and lesion removal is conducted under absolute sterile clinical conditions by an NHS-trained practitioner. Utilizing safe, minor clinical procedures, we isolate and eliminate problematic skin tags, milia, and benign cosmetic lesions, ensuring minimal disturbance to the surrounding tissue and smooth, aesthetically pleasing healing.",
+    id: "thread-vein-removal",
+    title: "Thread Vein Removal",
+    description: "Fast and effective vascular therapy utilizing advanced light and heat energy to collapse and eliminate facial spider veins.",
+    longDescription: "Facial spider veins and fine red capillaries can create persistent redness that makeup fails to conceal. Our vascular capillary treatment utilizes targeted energy matching the absorption spectrum of damaged blood vessels. The heat collapses the micro-vessel walls, sealing them safely and instantly. Over the following weeks, your system naturally resorbs the collapsed vessel tissue, leading to a beautifully even, clear-toned complexion.",
+    priceRange: "From £90",
+    duration: "15 - 30 mins",
+    iconName: "Droplet",
+    benefits: [
+      "Targets and eliminates visible facial spider veins and red capillaries",
+      "Highly visible clearing, often immediately following treatment",
+      "Non-invasive procedure with clean and healthy healing cycles",
+      "Reduces dynamic facial flush and chronic superficial redness"
+    ],
+    procedureSteps: [
+      "Close vascular analysis under professional examination lights",
+      "Thorough skin sanitization and application of a light conductive clinical gel",
+      "Bespoke laser or light wavelength triggers directly onto target vessels",
+      "Cleansing of the area and application of specialized vascular recovery balm"
+    ],
+    bestSuitedFor: [
+      "Aesthetic concern over prominent red or blue spider veins on nose and cheeks",
+      "Persistent facial redness caused by tiny dilated capillaries",
+      "Anyone looking for quick, non-surgical relief from superficial vascular blemishes"
+    ]
+  },
+  {
+    id: "blemish-removal",
+    title: "Blemish Removal",
+    description: "Safe, sterile clinic procedures to hygienically isolate and eliminate skin tags, cherry angiomas, milia, and cosmetic marks.",
+    longDescription: "Do not risk hazardous or scarring at-home removal methods. Our professional Blemish Removal treatments are conducted under strict safety guidelines by an NHS-trained clinical practitioner. We utilize minor clinical procedures to carefully isolate and cleanly eliminate uncomfortable skin tags, cherry angiomas, persistent milia bumps, and benign superficial blemishes. This ensures the surrounding dermal layer is perfectly preserved for a smooth, scar-free, and comfortable recovery.",
     priceRange: "From £50",
     duration: "15 - 30 mins",
     iconName: "ShieldCheck",
     benefits: [
-      "Quick, minor procedure with immediate, clean results",
-      "Conducted using strictly single-use sterile medical tools",
-      "Prevents scarring or infection commonly caused by diy options",
-      "Gives you back smooth, comfortable skin texture"
+      "Clean, swift cosmetic removal with minimal to no healing marks",
+      "Perfect clinical sterility ensuring absolute infection prevention",
+      "Hygienic extraction of milia, cherry angiomas, and solar blemishes",
+      "Restores smooth skin topography and facial comfort"
     ],
     procedureSteps: [
-      "Comprehensive examination of the lesion to confirm benign cosmetic status",
-      "Deep sterilization of the targeted skin region and local numbing if required",
-      "Precise, aseptic removal of the cosmetic lesion",
-      "Application of sterile medical adhesive/antiseptic shield and homecare recovery guidance"
+      "Careful inspection of blemish type to ensure benign cosmetic nature",
+      "Deep sterilization of the skin area and precision clinical mapping",
+      "Gentle target separation or precise aseptic removal",
+      "Application of sterile protection serum and barrier adhesive shield"
     ],
     bestSuitedFor: [
-      "Aesthetic discomfort caused by frictional skin tags on neck, underarms, or body",
-      "Persistent milia bumps around eyes or cheeks",
-      "Patients seeking safe, sterile clinical removal with minimal scarring"
-    ]
-  },
-  {
-    id: "prescriptive-facial",
-    title: "Prescriptive Facial",
-    description: "Bespoke clinical facial designed around your specific skin goals, incorporating medical serums and massage.",
-    longDescription: "Our Prescriptive Facial is the perfect fusion of clinical oncology/dermatology expertise and sensorial spa luxury. Instead of standard menu options, this facial is custom-built on-the-spot. We choose active antioxidants, amino acids, and hydration compounds to feed your skin cells while integrating lymphatic drainage massage to contour and reduce facial puffiness.",
-    priceRange: "From £65",
-    duration: "60 mins",
-    iconName: "Smile",
-    benefits: [
-      "Totally bespoke to your specific skin needs on the day",
-      "Relieves muscle tension, drains fluid retention, and contours cheeks",
-      "Restores natural skin barrier function and locks in moisture",
-      "A deeply relaxing, serene, and stress-relieving treatment"
-    ],
-    procedureSteps: [
-      "Detailed visual assessment and discussion of your sensory preferences",
-      "Bespoke double clinical cleansing, mild enzyme exfoliation, and steamed towels",
-      "Manual lymphatic drainage face, neck, and shoulder massage",
-      "Bespoke mask infusion followed by targeted medical serums and SPF locks"
-    ],
-    bestSuitedFor: [
-      "Anyone wanting a highly personalized, medical-level, relaxing facial treatment",
-      "Stressed individuals needing professional skin maintenance combined with therapeutic touch",
-      "All skin types, including sensitive, sensitized, or dry skin"
+      "Irritating or raised skin tags catching on clothing around neck or body",
+      "Small red cherry angiomas or white sebaceous milia on face and eyelids",
+      "Anyone wanting safe, rapid clinical extraction instead of dangerous DIY tools"
     ]
   }
 ];
@@ -213,8 +187,8 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "Sarah Jenkins",
     location: "Morley, Leeds",
     rating: 5,
-    treatment: "Anti-Wrinkle & Skin Booster",
-    quote: "I can't recommend Confidence & Glow enough! Being treated by an NHS-trained professional made me feel so incredibly safe. She explained everything beautifully and my results are so soft and natural. Absolute 5-star experience!",
+    treatment: "Laser Skin Rejuvenation",
+    quote: "I can't recommend Confidence & Glow enough! Being treated by an NHS-trained professional made me feel so incredibly safe. Mantas explained everything beautifully and my laser skin rejuvenation results are so clear and radiant. Absolute 5-star experience!",
     date: "May 2026"
   },
   {
@@ -222,8 +196,8 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "Rebecca Thorne",
     location: "Gildersome, Leeds",
     rating: 5,
-    treatment: "Microneedling Session",
-    quote: "My skin has never looked this radiant or healthy! The clinic in Morley is stunning, exceptionally clean, and so relaxing. The microneedling has virtually erased my old acne marks. Simply the best aesthetics clinic in Leeds.",
+    treatment: "Laser Hair Removal",
+    quote: "My skin has never looked this radiant or healthy! The clinic is stunning, exceptionally clean, and so relaxing. The laser hair removal sessions have been life-changing—virtually painless and amazing results.",
     date: "June 2026"
   },
   {
@@ -231,8 +205,8 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "James Radcliffe",
     location: "Churwell, Morley",
     rating: 5,
-    treatment: "Chemical Peel & Skin Tag Removal",
-    quote: "Professional, hygienic, and highly skilled treatment. I had a skin tag removed and a chemical peel. The practitioner's medical background shone through immediately — everything was sterile and explained thoroughly.",
+    treatment: "Thread Vein & Blemish Removal",
+    quote: "Professional, hygienic, and highly skilled treatment. I had a stubborn blemish and some thread veins removed. Mantas' medical background shone through immediately — everything was sterile and explained thoroughly.",
     date: "April 2026"
   }
 ];

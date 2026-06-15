@@ -38,39 +38,39 @@ const CASES: CaseStudy[] = [
   },
   {
     id: "case-2",
-    title: "Dermal Hydration & Luminosity",
-    treatmentName: "Skin Booster (Profhilo / Seventy Hyal)",
-    sessions: "2 Sessions",
-    timeline: "4 Weeks Total",
-    beforeLabel: "Dehydrated State",
-    beforeDetails: "Coarse dermal dryness, static surface creepiness, and dull overall light reflectance in the outer epidermis layer.",
-    afterLabel: "Hydro-Infused Finish",
-    afterDetails: "Flooded with deep molecular water binding. Marked boost in natural elastin synthesis, radiant dewy bounce, and cell plushness.",
-    physiologicalBenefits: ["+180% Epidermal moisture retention", "Restored natural light reflection", "Smoothed skin creepiness"]
+    title: "Clinical Laser Hair Removal",
+    treatmentName: "Advanced Laser Hair Removal",
+    sessions: "6 Sessions",
+    timeline: "8 Weeks Intervals",
+    beforeLabel: "Coarse Follicular Growth",
+    beforeDetails: "Dense, rapid hair growth with persistent razor burn, deep dermal shadows, and recurrent uncomfortable ingrown hair cycles.",
+    afterLabel: "Dermal Silk Smoothness",
+    afterDetails: "Laser pulses safely disable active roots. The epidermis is left completely smooth, free of dark shadow or folliculitis redness.",
+    physiologicalBenefits: ["90%+ Permanent hair reduction", "Absolute clearance of razor bumps", "Preserved epidermal silkiness"]
   },
   {
     id: "case-3",
-    title: "Anatomical Line Relaxation",
-    treatmentName: "Anti-Wrinkle Neuromodulator Mapping",
-    sessions: "1 Session",
-    timeline: "14 Days Peak",
-    beforeLabel: "Dynamic Contraction",
-    beforeDetails: "Dynamic facial lines visible across frontalis and glabella mapping zones during active natural expressions.",
-    afterLabel: "Refined Muscular Rest",
-    afterDetails: "Targeted muscular relaxation leaving skin smoothed and resting beautifully, while completely retaining warm genuine expressions.",
-    physiologicalBenefits: ["Softened expression lines", "No 'frozen' look, fully natural movement", "NHS clinician anatomical safety"]
+    title: "Dermal Collagen Renewal",
+    treatmentName: "Laser Skin Rejuvenation",
+    sessions: "3 Sessions",
+    timeline: "6 Weeks Total",
+    beforeLabel: "Textured & Dull Epidermis",
+    beforeDetails: "Visible facial pore expansion, early micro-texture creasing, and diminished dynamic bounce from standard pollution and age.",
+    afterLabel: "Plump Fibroblast Boost",
+    afterDetails: "Mild sub-dermal heat pulses trigger the skin's self-healing cycle, restoring healthy elasticity and tightening micro-pores.",
+    physiologicalBenefits: ["Deep stimulated collagen bands", "Refined surface skin texture", "Vibrant, healthy light reflection"]
   },
   {
     id: "case-4",
-    title: "Collagen Pores & Scar Remodeling",
-    treatmentName: "Medical-Grade Motorized Microneedling",
-    sessions: "3 Sessions",
-    timeline: "8 Weeks Total",
-    beforeLabel: "Uneven Micro-Texture",
-    beforeDetails: "Pitted acne scarring borders, coarse skin micro-pores, and persistent localized post-inflammatory skin pigmentation.",
-    afterLabel: "Remodeled Barrier Harmony",
-    afterDetails: "Fractional remodeling of fresh fibroblasts. Softened scar depths, tightened epidermal cell network, and ultra-refined smooth pores.",
-    physiologicalBenefits: ["Shrunk enlarged pore appearance", "Reorganized scar fibrous bands", "Accelerated natural epidermal renewal"]
+    title: "Targeted Sun Damage Clearing",
+    treatmentName: "Pigmentation Treatment",
+    sessions: "2 Sessions",
+    timeline: "4 Weeks Total",
+    beforeLabel: "Melanin Clustering",
+    beforeDetails: "Historic UV-induced sun spots, solar freckles, and localized brown pigment patches disrupting facial uniformity.",
+    afterLabel: "Unified Dermal Complexion",
+    afterDetails: "Laser energy targets internal melanin clusters for natural lymphatic clearance, revealing a bright, even-toned baseline.",
+    physiologicalBenefits: ["Sparsely faded solar freckles", "Even, unified pigmentation", "Enhanced bright cell turnover"]
   }
 ];
 

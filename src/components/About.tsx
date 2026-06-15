@@ -49,11 +49,17 @@ export default function About() {
             <div className="h-[2px] w-16 bg-[#D4A5A5] mb-8" />
 
             <div className="space-y-6 text-gray-600 sm:text-base leading-relaxed font-sans">
-              <p>
-                Welcome to Confidence &amp; Glow Aesthetics. Our clinic was founded on a simple medical principle: <strong className="text-gray-900 font-medium">your skin deserves the highest standard of anatomical care.</strong>
+              <p className="text-[#4A7C7C] font-serif italic text-lg">
+                Welcome to Confidence &amp; Glow Aesthetics.
               </p>
               <p>
-                Led by an <strong className="text-[#4A7C7C] font-semibold">NHS-trained practitioner</strong> with years of experience in acute medical environments, we uniquely bridge the gap between luxury spa experiences and clinical dermatology. We combine advanced laser technology, sterile safety standards, and scientifically validated formulations to give you exceptional results with zero compromise.
+                I'm <strong className="text-gray-900 font-semibold">Mantas</strong>, the owner and practitioner here, with a clinical background in the NHS. My focus is simple: <strong className="text-gray-900 font-semibold">helping people feel more confident in their skin</strong> through safe, professional treatments.
+              </p>
+              <p>
+                My specialties include laser hair removal, laser skin rejuvenation, pigmentation treatment, thread vein removal, and blemish removal. These treatments are ideal if you're looking to reduce unwanted hair, even out your skin tone and texture, or address specific concerns, all with minimal downtime.
+              </p>
+              <p>
+                Choosing the right practitioner matters. That's why every visit starts with honest advice and a thorough consultation, followed by a treatment plan built around your skin and your goals.
               </p>
             </div>
 

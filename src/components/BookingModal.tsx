@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X, Sparkles, Phone, MessageSquare, Calendar, Clock, MapPin, CheckCircle2, Copy, Trash2, ArrowRight } from "lucide-react";
+import { X, Sparkles, Phone, MessageSquare, Calendar, Clock, MapPin, CheckCircle2, Copy, Trash2, ArrowRight, RefreshCw } from "lucide-react";
 import { TREATMENTS, Booking, Treatment } from "../types";
 
 interface BookingModalProps {
@@ -26,6 +26,7 @@ export default function BookingModal({
   // Successful Reservation state
   const [confirmedBooking, setConfirmedBooking] = useState<Booking | null>(null);
   const [copiedId, setCopiedId] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Synchronize preSelectedTreatmentId
   useEffect(() => {
@@ -89,12 +90,14 @@ export default function BookingModal({
   const activeTreatment = TREATMENTS.find((t) => t.id === treatmentId);
 
   // Submit Handler
-  const handleBookingSubmit = (e: React.FormEvent) => {
+  const handleBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!patientName || !email || !phone || !treatmentId || !selectedDate) {
       alert("Please fill in all clinical booking requirements.");
       return;
     }
+
+    setIsSubmitting(true);
 
     const matchedTreatment = TREATMENTS.find((t) => t.id === treatmentId);
     const bookingId = `CG-${Math.floor(10000 + Math.random() * 90000)}`;
@@ -113,14 +116,30 @@ export default function BookingModal({
       status: "Confirmed",
     };
 
-    // Save to LocalStorage
-    const existing: Booking[] = JSON.parse(localStorage.getItem("active_bookings") || "[]");
-    localStorage.setItem("active_bookings", JSON.stringify([newBooking, ...existing]));
+    try {
+      // Trigger API backend notification via Resend
+      const response = await fetch("/api/book", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ booking: newBooking }),
+      });
+      const data = await response.json();
+      console.log("Resend booking notification response:", data);
+    } catch (err) {
+      console.error("Failed to notify backend server via Resend", err);
+    } finally {
+      // Save locally so patient still has records on their dashboard
+      const existing: Booking[] = JSON.parse(localStorage.getItem("active_bookings") || "[]");
+      localStorage.setItem("active_bookings", JSON.stringify([newBooking, ...existing]));
 
-    // Dispatch global event so other components can render active bookings
-    window.dispatchEvent(new Event("bookings_updated"));
+      // Dispatch global event so other components can render active bookings
+      window.dispatchEvent(new Event("bookings_updated"));
 
-    setConfirmedBooking(newBooking);
+      setConfirmedBooking(newBooking);
+      setIsSubmitting(false);
+    }
   };
 
   const handleCopyCode = () => {
@@ -382,11 +401,25 @@ export default function BookingModal({
               <div className="pt-4 shrink-0">
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center space-x-2 py-4 rounded-full text-xs font-bold uppercase tracking-wider text-cream bg-[#4A7C7C] hover:bg-[#375E5E] transition-all duration-300 shadow-md transform hover:-translate-y-0.5 cursor-pointer"
+                  disabled={isSubmitting}
+                  className={`w-full flex items-center justify-center space-x-2 py-4 rounded-full text-xs font-bold uppercase tracking-wider text-cream transition-all duration-300 shadow-md transform ${
+                    isSubmitting
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-[#4A7C7C] hover:bg-[#375E5E] hover:-translate-y-0.5 cursor-pointer"
+                  }`}
                   id="submit-booking-btn"
                 >
-                  <Calendar className="w-4 h-4" />
-                  <span>Secure Upcoming Skin Consultation</span>
+                  {isSubmitting ? (
+                    <>
+                      <RefreshCw className="w-4 h-4 animate-spin" />
+                      <span>Transmitting Booking Request...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Calendar className="w-4 h-4" />
+                      <span>Secure Upcoming Skin Consultation</span>
+                    </>
+                  )}
                 </button>
               </div>
 
