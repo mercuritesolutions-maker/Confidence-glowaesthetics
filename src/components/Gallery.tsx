@@ -2,6 +2,10 @@ import React from "react";
 import { motion } from "motion/react";
 import { Sparkles, Droplet, Layers, Star, Sliders, CheckCircle2, RefreshCw } from "lucide-react";
 
+// Real clinical before and after images uploaded by the user
+import threadVeinBefore from "../assets/images/Threadvienbefore.jpg";
+import threadVeinAfter from "../assets/images/Threadvienafter.jpg";
+
 interface CaseStudy {
   id: string;
   title: string;
@@ -13,11 +17,27 @@ interface CaseStudy {
   afterLabel: string;
   afterDetails: string;
   physiologicalBenefits: string[];
+  beforeImage?: string;
+  afterImage?: string;
 }
 
 const CASES: CaseStudy[] = [
   {
     id: "case-1",
+    title: "Facial Thread Vein Removal",
+    treatmentName: "Vascular Capillary Therapy",
+    sessions: "1 Session",
+    timeline: "Immediate Resumption",
+    beforeLabel: "Dilated Capillaries",
+    beforeDetails: "Delicate spider veins and red vascular congestion visible near the facial surface.",
+    afterLabel: "Vesicular Collapse",
+    afterDetails: "Targeted energy collapses damaged vessel walls, encouraging safe physiological resorption and clear, unified skin.",
+    physiologicalBenefits: ["Instant vessel consolidation", "Clear, even-toned complexion", "Zero dermal scarring"],
+    beforeImage: threadVeinBefore,
+    afterImage: threadVeinAfter,
+  },
+  {
+    id: "case-2",
     title: "Dermal Hydration & Luminosity",
     treatmentName: "Skin Booster (Profhilo / Seventy Hyal)",
     sessions: "2 Sessions",
@@ -29,7 +49,7 @@ const CASES: CaseStudy[] = [
     physiologicalBenefits: ["+180% Epidermal moisture retention", "Restored natural light reflection", "Smoothed skin creepiness"]
   },
   {
-    id: "case-2",
+    id: "case-3",
     title: "Anatomical Line Relaxation",
     treatmentName: "Anti-Wrinkle Neuromodulator Mapping",
     sessions: "1 Session",
@@ -41,7 +61,7 @@ const CASES: CaseStudy[] = [
     physiologicalBenefits: ["Softened expression lines", "No 'frozen' look, fully natural movement", "NHS clinician anatomical safety"]
   },
   {
-    id: "case-3",
+    id: "case-4",
     title: "Collagen Pores & Scar Remodeling",
     treatmentName: "Medical-Grade Motorized Microneedling",
     sessions: "3 Sessions",
@@ -51,18 +71,6 @@ const CASES: CaseStudy[] = [
     afterLabel: "Remodeled Barrier Harmony",
     afterDetails: "Fractional remodeling of fresh fibroblasts. Softened scar depths, tightened epidermal cell network, and ultra-refined smooth pores.",
     physiologicalBenefits: ["Shrunk enlarged pore appearance", "Reorganized scar fibrous bands", "Accelerated natural epidermal renewal"]
-  },
-  {
-    id: "case-4",
-    title: "Sun-Damage Epidermal Brightening",
-    treatmentName: "Bespoke Prescription Chemical Peeling",
-    sessions: "2 Sessions",
-    timeline: "3 Weeks Total",
-    beforeLabel: "Melanin Buildup",
-    beforeDetails: "Uneven pigment patches, sun-induced static freckles, and localized congestion holding older dead surface cells.",
-    afterLabel: "Uniform Clear Complexion",
-    afterDetails: "Lifting of hyperpigmentation boundaries. Fresh healthy cell replacement, baby-soft surface texture, and uniform skin tone.",
-    physiologicalBenefits: ["Brightened dark solar spots", "Cleared dynamic follicular plug", "Balanced physiological pH cycle"]
   }
 ];
 
@@ -86,7 +94,7 @@ export default function Gallery() {
           </h2>
           <div className="h-[2px] w-16 bg-[#6B7152] mx-auto mb-6" />
           <p className="text-xs sm:text-sm text-gray-600 font-sans max-w-lg mx-auto leading-relaxed">
-            Take a look at how we measure success. Guided by our medical expertise, these comparative case studies represent real dermal regenerations with zero visual exaggerations.
+            Take a look at how we measure success. Guided by our medical expertise, these comparative case studies represent real dermal restorations with zero visual exaggerations.
           </p>
         </div>
 
@@ -119,48 +127,96 @@ export default function Gallery() {
                   </div>
                 </div>
 
-                {/* Neutral Placeholder Box Grid comparing Before vs After */}
+                {/* Micro Images or Neutral Placeholder box wrapper */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
                   
-                  {/* Before Neutral Box */}
-                  <div className="relative rounded-xl border border-dashed border-gray-300 bg-[#FAF7F2] p-5 flex flex-col justify-between aspect-[1.35] select-none group">
-                    <div>
-                      <span className="absolute top-3 right-3 text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 bg-gray-200/60 rounded text-gray-500 font-semibold">
-                        Phase A
+                  {/* Before Segment */}
+                  {item.beforeImage ? (
+                    <div className="relative rounded-xl overflow-hidden border border-gray-200 aspect-[1.35] select-none group shadow-sm bg-slate-100">
+                      <img 
+                        src={item.beforeImage} 
+                        alt={item.beforeLabel} 
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        referrerPolicy="no-referrer"
+                      />
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 via-slate-950/40 to-transparent p-4 flex flex-col justify-end h-1/2" />
+                      <span className="absolute top-3 right-3 text-[10px] font-mono uppercase tracking-wider px-2.5 py-0.5 bg-rose-500 text-white rounded font-bold shadow-sm">
+                        Before
                       </span>
-                      <p className="font-serif text-sm font-bold text-gray-900 flex items-center mb-2">
-                        <span className="h-2 w-2 rounded-full bg-rose-400 mr-2" />
-                        {item.beforeLabel}
-                      </p>
-                      <p className="text-xs text-gray-500 font-sans leading-relaxed">
-                        {item.beforeDetails}
-                      </p>
+                      <div className="absolute bottom-3 left-3 right-3 text-left">
+                        <p className="font-serif text-[13px] font-bold text-white flex items-center mb-0.5">
+                          <span className="h-2 w-2 rounded-full bg-rose-500 mr-2 shrink-0" />
+                          {item.beforeLabel}
+                        </p>
+                        <p className="text-[10px] text-gray-200 font-sans leading-tight line-clamp-2">
+                          {item.beforeDetails}
+                        </p>
+                      </div>
                     </div>
-                    <div className="border-t border-gray-200/60 pt-3 flex items-center text-[9px] text-gray-400 font-mono mt-3 uppercase tracking-wider">
-                      <Sliders className="w-3.5 h-3.5 mr-1" />
-                      <span>Initial Assessment Profile</span>
+                  ) : (
+                    <div className="relative rounded-xl border border-dashed border-gray-300 bg-[#FAF7F2] p-5 flex flex-col justify-between aspect-[1.35] select-none group">
+                      <div>
+                        <span className="absolute top-3 right-3 text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 bg-gray-200/60 rounded text-gray-500 font-semibold">
+                          Phase A
+                        </span>
+                        <p className="font-serif text-sm font-bold text-gray-900 flex items-center mb-2">
+                          <span className="h-2 w-2 rounded-full bg-rose-400 mr-2" />
+                          {item.beforeLabel}
+                        </p>
+                        <p className="text-xs text-gray-500 font-sans leading-relaxed">
+                          {item.beforeDetails}
+                        </p>
+                      </div>
+                      <div className="border-t border-gray-200/60 pt-3 flex items-center text-[9px] text-gray-400 font-mono mt-3 uppercase tracking-wider">
+                        <Sliders className="w-3.5 h-3.5 mr-1" />
+                        <span>Initial Assessment Profile</span>
+                      </div>
                     </div>
-                  </div>
+                  )}
 
-                  {/* After Neutral Box */}
-                  <div className="relative rounded-xl border-2 border-[#4A7C7C]/30 bg-[#4A7C7C]/5 p-5 flex flex-col justify-between aspect-[1.35] select-none group">
-                    <div>
-                      <span className="absolute top-3 right-3 text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 bg-[#4A7C7C]/10 text-[#4A7C7C] rounded font-extrabold">
-                        Healthy Goal
+                  {/* After Segment */}
+                  {item.afterImage ? (
+                    <div className="relative rounded-xl overflow-hidden border-2 border-[#4A7C7C]/30 aspect-[1.35] select-none group shadow-md bg-slate-100">
+                      <img 
+                        src={item.afterImage} 
+                        alt={item.afterLabel} 
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        referrerPolicy="no-referrer"
+                      />
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 via-slate-950/40 to-transparent p-4 flex flex-col justify-end h-1/2" />
+                      <span className="absolute top-3 right-3 text-[10px] font-mono uppercase tracking-wider px-2.5 py-0.5 bg-emerald-600 text-white rounded font-extrabold shadow-sm">
+                        After
                       </span>
-                      <p className="font-serif text-sm font-bold text-gray-950 flex items-center mb-2">
-                        <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 mr-2 animate-pulse" />
-                        {item.afterLabel}
-                      </p>
-                      <p className="text-xs text-gray-700 font-sans leading-relaxed">
-                        {item.afterDetails}
-                      </p>
+                      <div className="absolute bottom-3 left-3 right-3 text-left">
+                        <p className="font-serif text-[13px] font-bold text-white flex items-center mb-0.5">
+                          <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 mr-2 shrink-0 animate-pulse" />
+                          {item.afterLabel}
+                        </p>
+                        <p className="text-[10px] text-gray-200 font-sans leading-tight line-clamp-2">
+                          {item.afterDetails}
+                        </p>
+                      </div>
                     </div>
-                    <div className="border-t border-[#4A7C7C]/10 pt-3 flex items-center text-[9px] text-[#4A7C7C] font-mono mt-3 uppercase tracking-wider font-bold">
-                      <Sparkles className="w-3.5 h-3.5 mr-1 text-[#D4A5A5] animate-spin-slow" />
-                      <span>Post-Procedure Restored Status</span>
+                  ) : (
+                    <div className="relative rounded-xl border-2 border-[#4A7C7C]/30 bg-[#4A7C7C]/5 p-5 flex flex-col justify-between aspect-[1.35] select-none group">
+                      <div>
+                        <span className="absolute top-3 right-3 text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 bg-[#4A7C7C]/10 text-[#4A7C7C] rounded font-extrabold">
+                          Healthy Goal
+                        </span>
+                        <p className="font-serif text-sm font-bold text-gray-950 flex items-center mb-2">
+                          <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 mr-2 animate-pulse" />
+                          {item.afterLabel}
+                        </p>
+                        <p className="text-xs text-gray-700 font-sans leading-relaxed">
+                          {item.afterDetails}
+                        </p>
+                      </div>
+                      <div className="border-t border-[#4A7C7C]/10 pt-3 flex items-center text-[9px] text-[#4A7C7C] font-mono mt-3 uppercase tracking-wider font-bold">
+                        <Sparkles className="w-3.5 h-3.5 mr-1 text-[#D4A5A5] animate-spin-slow" />
+                        <span>Post-Procedure Restored Status</span>
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                 </div>
               </div>
