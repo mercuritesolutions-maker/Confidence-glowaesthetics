@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import practitionerImg from "../assets/images/practitioner_about_1781515831869.jpg";
+import practitionerImg from "../assets/images/FB_IMG_1781518890806.jpg";
 import { Award, ShieldAlert, HeartHandshake, Check } from "lucide-react";
 
 export default function About() {
