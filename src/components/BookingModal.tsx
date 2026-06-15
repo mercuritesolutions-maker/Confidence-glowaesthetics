@@ -27,6 +27,8 @@ export default function BookingModal({
   const [confirmedBooking, setConfirmedBooking] = useState<Booking | null>(null);
   const [copiedId, setCopiedId] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [emailStatus, setEmailStatus] = useState<'idle' | 'success' | 'warn_no_key' | 'failed'>('idle');
+  const [emailErrorMessage, setEmailErrorMessage] = useState<string | null>(null);
 
   // Synchronize preSelectedTreatmentId
   useEffect(() => {
@@ -98,6 +100,8 @@ export default function BookingModal({
     }
 
     setIsSubmitting(true);
+    let emailStatusResult: 'success' | 'warn_no_key' | 'failed' = 'success';
+    let errorMessage: string | null = null;
 
     const matchedTreatment = TREATMENTS.find((t) => t.id === treatmentId);
     const bookingId = `CG-${Math.floor(10000 + Math.random() * 90000)}`;
@@ -127,8 +131,19 @@ export default function BookingModal({
       });
       const data = await response.json();
       console.log("Resend booking notification response:", data);
-    } catch (err) {
+
+      if (!response.ok) {
+        emailStatusResult = 'failed';
+        errorMessage = data.error || `Server responded with status ${response.status}`;
+      } else if (data.status === "saved_locally_only") {
+        emailStatusResult = 'warn_no_key';
+      } else {
+        emailStatusResult = 'success';
+      }
+    } catch (err: any) {
       console.error("Failed to notify backend server via Resend", err);
+      emailStatusResult = 'failed';
+      errorMessage = err.message || "Failed to make a server request.";
     } finally {
       // Save locally so patient still has records on their dashboard
       const existing: Booking[] = JSON.parse(localStorage.getItem("active_bookings") || "[]");
@@ -137,6 +152,8 @@ export default function BookingModal({
       // Dispatch global event so other components can render active bookings
       window.dispatchEvent(new Event("bookings_updated"));
 
+      setEmailStatus(emailStatusResult);
+      setEmailErrorMessage(errorMessage);
       setConfirmedBooking(newBooking);
       setIsSubmitting(false);
     }
@@ -440,6 +457,52 @@ export default function BookingModal({
                 <p className="text-xs text-gray-500 mt-1 uppercase tracking-widest font-mono">
                   Your request has been clinically verified
                 </p>
+              </div>
+
+              {/* Resend Email Notification Status Alert */}
+              <div className="max-w-md mx-auto text-left text-xs">
+                {emailStatus === 'success' && (
+                  <div className="text-emerald-800 bg-emerald-50 border border-emerald-200 p-4 rounded-xl">
+                    <p className="font-bold text-xs flex items-center">
+                      <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 mr-2" />
+                      Email Notification Dispatched
+                    </p>
+                    <p className="text-[11px] text-emerald-700/95 mt-1 leading-relaxed">
+                      A beautifully formatted appointment notification has been sent successfully to the clinician's inbox using the Resend API.
+                    </p>
+                  </div>
+                )}
+                {emailStatus === 'warn_no_key' && (
+                  <div className="text-amber-800 bg-amber-50 border border-amber-200 p-4 rounded-xl">
+                    <p className="font-bold text-xs flex items-center">
+                      <span className="inline-block w-2 h-2 rounded-full bg-amber-500 mr-2 animate-pulse" />
+                      Saved Locally (API Key Missing)
+                    </p>
+                    <p className="text-[11px] text-amber-700/95 mt-1 leading-relaxed">
+                      The booking is registered on your client dashboard, but the automated email notification is missing the server-side <code className="font-mono bg-amber-100 px-1 rounded text-[10px]">RESEND_API_KEY</code> environment variable.
+                    </p>
+                    <p className="text-[10px] text-amber-600/90 mt-2 leading-relaxed">
+                      To activate emails, provide your API credentials as described in the guidelines.
+                    </p>
+                  </div>
+                )}
+                {emailStatus === 'failed' && (
+                  <div className="text-rose-950 bg-rose-50 border border-rose-200 p-4 rounded-xl">
+                    <p className="font-bold text-xs flex items-center text-rose-800">
+                      <span className="inline-block w-2 h-2 rounded-full bg-rose-500 mr-2 animate-pulse" />
+                      Email Notification Blocked
+                    </p>
+                    <div className="text-[11px] text-rose-800/95 mt-1 leading-relaxed">
+                      The Resend mail server returned a specific error response:
+                      <div className="font-mono text-[10px] bg-rose-100 p-2 rounded mt-1.5 overflow-x-auto border border-rose-200 text-rose-900 select-all font-semibold">
+                        {emailErrorMessage}
+                      </div>
+                    </div>
+                    <p className="text-[11px] text-rose-700/90 mt-2 leading-relaxed">
+                      <strong>Resend Sandbox Rule:</strong> If you are testing with a default Resend API key and haven't verified a custom domain on your Resend account, you <strong>must</strong> set your <code className="font-mono bg-rose-100 text-[10px] px-0.5 rounded text-rose-900">ADMIN_RECEIVER_EMAIL</code> to your <strong>account registration email</strong> (e.g. your personal email address of your Resend account), and the from address must use <code className="font-mono bg-rose-100 text-[10px] px-0.5 rounded text-rose-900">onboarding@resend.dev</code>.
+                    </p>
+                  </div>
+                )}
               </div>
 
               {/* Confirmed Ticket Receipt */}
