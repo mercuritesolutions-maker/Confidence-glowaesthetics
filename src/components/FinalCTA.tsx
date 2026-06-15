@@ -1,7 +1,11 @@
 import { motion } from "motion/react";
 import { Sparkles, CalendarCheck } from "lucide-react";
 
-export default function FinalCTA() {
+interface FinalCTAProps {
+  onOpenBooking: () => void;
+}
+
+export default function FinalCTA({ onOpenBooking }: FinalCTAProps) {
   return (
     <section id="book-now" className="relative py-28 bg-[#6B7152] overflow-hidden text-[#F5F0E8] text-center">
       {/* Visual Accents */}
@@ -35,16 +39,14 @@ export default function FinalCTA() {
 
           {/* Book Online Now Button */}
           <div className="flex flex-col sm:flex-row items-center gap-4">
-            <a
-              href="https://www.fresha.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center space-x-2.5 px-10 py-4 rounded-full text-xs font-bold uppercase tracking-widest text-[#F5F0E8] bg-[#4A7C7C] hover:bg-[#375E5E] transition-all transform hover:-translate-y-0.5 shadow-lg border border-[#4A7C7C]/20"
+            <button
+              onClick={onOpenBooking}
+              className="inline-flex items-center justify-center space-x-2.5 px-10 py-4 rounded-full text-xs font-bold uppercase tracking-widest text-[#F5F0E8] bg-[#4A7C7C] hover:bg-[#375E5E] transition-all transform hover:-translate-y-0.5 shadow-lg border border-[#4A7C7C]/20 cursor-pointer"
               id="final-cta-book-btn"
             >
               <CalendarCheck className="w-4 h-4" />
               <span>Book Online Now</span>
-            </a>
+            </button>
             
             <a
               href="tel:+447404106477"

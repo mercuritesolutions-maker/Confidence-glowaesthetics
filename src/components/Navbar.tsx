@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Sparkles } from "lucide-react";
 
-export default function Navbar() {
+interface NavbarProps {
+  onOpenBooking: () => void;
+}
+
+export default function Navbar({ onOpenBooking }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -66,15 +70,13 @@ export default function Navbar() {
 
           {/* Booking CTA Button */}
           <div className="hidden md:block">
-            <a
-              href="https://www.fresha.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase text-[#F5F0E8] bg-[#4A7C7C] hover:bg-[#375E5E] transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+            <button
+              onClick={onOpenBooking}
+              className="inline-flex items-center justify-center px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase text-[#F5F0E8] bg-[#4A7C7C] hover:bg-[#375E5E] transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 cursor-pointer"
               id="nav-book-btn"
             >
               Book Online
-            </a>
+            </button>
           </div>
 
           {/* Mobile hamburger button */}
@@ -110,15 +112,15 @@ export default function Navbar() {
             </a>
           ))}
           <div className="pt-4 px-4">
-            <a
-              href="https://www.fresha.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setIsOpen(false)}
-              className="flex w-full items-center justify-center px-6 py-3 rounded-full text-sm font-semibold tracking-wider uppercase text-[#F5F0E8] bg-[#4A7C7C] hover:bg-[#375E5E] transition-all"
+            <button
+              onClick={() => {
+                setIsOpen(false);
+                onOpenBooking();
+              }}
+              className="flex w-full items-center justify-center px-6 py-3 rounded-full text-sm font-semibold tracking-wider uppercase text-[#F5F0E8] bg-[#4A7C7C] hover:bg-[#375E5E] transition-all cursor-pointer"
             >
               Book Online
-            </a>
+            </button>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "motion/react";
-import { Sparkles, Droplet, Grid, Layers, ShieldCheck, Smile, ChevronRight, HelpCircle } from "lucide-react";
+import { Sparkles, Droplet, Grid, Layers, ShieldCheck, Smile, ChevronRight, HelpCircle, Calendar, Eye } from "lucide-react";
 import { TREATMENTS, Treatment } from "../types";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -12,7 +12,12 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Smile: Smile,
 };
 
-export default function Treatments() {
+interface TreatmentsProps {
+  onSelectTreatment: (treatment: Treatment) => void;
+  onBookTreatment: (treatmentId: string) => void;
+}
+
+export default function Treatments({ onSelectTreatment, onBookTreatment }: TreatmentsProps) {
   return (
     <section id="treatments" className="py-24 bg-[#F5F0E8] relative">
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#6B7152]/20 to-transparent" />
@@ -42,7 +47,8 @@ export default function Treatments() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group relative flex flex-col justify-between bg-[#FCFAF5] p-8 rounded-2xl border border-transparent shadow-[0_4px_25px_-5px_rgba(107,113,82,0.06)] hover:shadow-[0_10px_35px_-8px_rgba(107,113,82,0.12)] hover:bg-[#FAF6EE] hover:border-[#6B7152] transition-all duration-300"
+                onClick={() => onSelectTreatment(treatment)}
+                className="group relative flex flex-col justify-between bg-[#FCFAF5] p-8 rounded-2xl border border-transparent shadow-[0_4px_25px_-5px_rgba(107,113,82,0.06)] hover:shadow-[0_10px_35px_-8px_rgba(107,113,82,0.12)] hover:bg-[#FAF6EE] hover:border-[#6B7152] transition-all duration-300 cursor-pointer text-left"
                 id={`treatment-card-${treatment.id}`}
               >
                 <div>
@@ -66,31 +72,40 @@ export default function Treatments() {
 
                   {/* Benefits checklist */}
                   <div className="space-y-2 mb-8 select-none">
-                    <p className="text-[10px] uppercase tracking-widest text-[#6B7152] font-semibold">Treatment Benefits:</p>
-                    {treatment.benefits.map((benefit: string, bIdx: number) => (
+                    <p className="text-[10px] uppercase tracking-widest text-[#6B7152] font-semibold">Key Benefits:</p>
+                    {treatment.benefits.slice(0, 3).map((benefit: string, bIdx: number) => (
                       <div key={bIdx} className="flex items-start text-xs text-gray-700">
                         <span className="text-[#6B7152] mr-2 font-bold font-sans">✓</span>
-                        <span className="leading-tight">{benefit}</span>
+                        <span className="leading-tight truncate">{benefit}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 {/* Card CTA Actions */}
-                <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
+                <div className="pt-4 border-t border-gray-100 flex items-center justify-between" onClick={(e) => e.stopPropagation()}>
                   <span className="text-xs text-gray-500 font-mono flex items-center">
                     ⏱ {treatment.duration}
                   </span>
                   
-                  <a
-                    href="https://www.fresha.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-1 text-xs font-semibold text-[#4A7C7C] hover:text-[#375E5E] transition-colors"
-                  >
-                    <span>Secure booking</span>
-                    <ChevronRight className="w-4.5 h-4.5 group-hover:translate-x-1 transition-transform" />
-                  </a>
+                  <div className="flex items-center space-x-3">
+                    <button
+                      onClick={() => onSelectTreatment(treatment)}
+                      className="text-xs font-semibold text-gray-500 hover:text-[#4A7C7C] transition-colors flex items-center space-x-1"
+                      title="View Procedure Details"
+                    >
+                      <Eye className="w-4 h-4" />
+                      <span className="hidden sm:inline">Details</span>
+                    </button>
+                    
+                    <button
+                      onClick={() => onBookTreatment(treatment.id)}
+                      className="inline-flex items-center space-x-1.5 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider text-cream bg-[#4A7C7C] hover:bg-[#375E5E] transition-all transform hover:-translate-y-0.5 shadow-sm hover:shadow-md cursor-pointer"
+                    >
+                      <Calendar className="w-3.5 h-3.5" />
+                      <span>Book</span>
+                    </button>
+                  </div>
                 </div>
               </motion.div>
             );

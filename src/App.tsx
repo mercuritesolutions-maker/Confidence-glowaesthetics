@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import TrustBar from "./components/TrustBar";
@@ -9,7 +10,26 @@ import LocationHours from "./components/LocationHours";
 import FinalCTA from "./components/FinalCTA";
 import Footer from "./components/Footer";
 
+// Custom premium booking/details elements
+import { Treatment } from "./types";
+import TreatmentDetailModal from "./components/TreatmentDetailModal";
+import BookingModal from "./components/BookingModal";
+import ActiveBookings from "./components/ActiveBookings";
+
 export default function App() {
+  const [selectedTreatment, setSelectedTreatment] = useState<Treatment | null>(null);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [preSelectedTreatmentId, setPreSelectedTreatmentId] = useState("");
+
+  const handleOpenBooking = (treatmentId: string = "") => {
+    setPreSelectedTreatmentId(treatmentId);
+    setIsBookingOpen(true);
+  };
+
+  const handleSelectTreatment = (treatment: Treatment) => {
+    setSelectedTreatment(treatment);
+  };
+
   return (
     <div className="relative min-h-screen bg-[#F5F0E8] overflow-x-hidden selection:bg-[#4A7C7C] selection:text-[#F5F0E8]">
       {/* Editorial Decorative Background Highlights */}
@@ -21,16 +41,22 @@ export default function App() {
 
       <div className="relative z-10">
         {/* Sticky Global Navigation */}
-        <Navbar />
+        <Navbar onOpenBooking={() => handleOpenBooking("")} />
 
         {/* Home Hero Introduction */}
-        <Hero />
+        <Hero onOpenBooking={() => handleOpenBooking("")} />
+
+        {/* Dynamic active user appointments reminder (if any booked in current browser session) */}
+        <ActiveBookings />
 
         {/* Aggregated Reviews & Trust Rating stats */}
         <TrustBar />
 
         {/* Dynamic Interactive Treatments / Spa Menu */}
-        <Treatments />
+        <Treatments 
+          onSelectTreatment={handleSelectTreatment} 
+          onBookTreatment={handleOpenBooking} 
+        />
 
         {/* NHS Practitioner Bio and Clinical standards */}
         <About />
@@ -45,12 +71,24 @@ export default function App() {
         <LocationHours />
 
         {/* Bottom Booking Call to Action */}
-        <FinalCTA />
+        <FinalCTA onOpenBooking={() => handleOpenBooking("")} />
 
         {/* Detailed Address list and Floating WhatsApp bubble */}
         <Footer />
       </div>
+
+      {/* MODAL CORES */}
+      <TreatmentDetailModal 
+        treatment={selectedTreatment} 
+        onClose={() => setSelectedTreatment(null)} 
+        onBook={handleOpenBooking} 
+      />
+
+      <BookingModal 
+        isOpen={isBookingOpen} 
+        onClose={() => setIsBookingOpen(false)} 
+        preSelectedTreatmentId={preSelectedTreatmentId} 
+      />
     </div>
   );
 }
-

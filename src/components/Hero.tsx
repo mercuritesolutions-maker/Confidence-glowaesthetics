@@ -1,7 +1,11 @@
 import { motion } from "motion/react";
 import heroImg from "../assets/images/hero_treatment_1781515815215.jpg";
 
-export default function Hero() {
+interface HeroProps {
+  onOpenBooking: () => void;
+}
+
+export default function Hero({ onOpenBooking }: HeroProps) {
   return (
     <section
       id="home"
@@ -55,15 +59,13 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.45 }}
               className="mt-8 flex flex-wrap gap-4"
             >
-              <a
-                href="https://www.fresha.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-8 py-3.5 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-[#4A7C7C] hover:bg-[#375E5E] transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+              <button
+                onClick={onOpenBooking}
+                className="px-8 py-3.5 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-[#4A7C7C] hover:bg-[#375E5E] transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 cursor-pointer"
                 id="hero-book-btn"
               >
                 Book Your Consultation
-              </a>
+              </button>
               <a
                 href="#treatments"
                 className="px-8 py-3.5 rounded-full text-xs font-semibold uppercase tracking-wider text-[#6B7152] border-2 border-[#D4A5A5] hover:bg-[#D4A5A5]/10 hover:text-gray-900 transition-all transform hover:-translate-y-0.5"
