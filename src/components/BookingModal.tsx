@@ -129,10 +129,30 @@ export default function BookingModal({
         },
         body: JSON.stringify({ booking: newBooking }),
       });
-      const data = await response.json();
-      console.log("Resend booking notification response:", data);
 
-      if (!response.ok) {
+      let data: any = {};
+      let isJson = false;
+      const contentType = response.headers.get("content-type");
+      
+      if (contentType && contentType.includes("application/json")) {
+        try {
+          data = await response.json();
+          isJson = true;
+        } catch (jsonErr) {
+          console.error("Failed to parse JSON response:", jsonErr);
+        }
+      }
+
+      if (!isJson) {
+        const textResponse = await response.text();
+        // Fallback check: if the text contains a massive HTML page, extract a simplified summary
+        let cleanText = textResponse.trim().substring(0, 300);
+        if (cleanText.includes("<!DOCTYPE html>") || cleanText.includes("<html")) {
+          cleanText = `HTML Response (Status ${response.status}): The server did not respond with JSON. The dev server is starting up or a server configuration error occurred.`;
+        }
+        emailStatusResult = 'failed';
+        errorMessage = cleanText || `Empty response with status ${response.status}`;
+      } else if (!response.ok) {
         emailStatusResult = 'failed';
         errorMessage = data.error || `Server responded with status ${response.status}`;
       } else if (data.status === "saved_locally_only") {

@@ -14,26 +14,33 @@ async function startServer() {
 
   // API Route for sending booking notifications via Resend
   app.post("/api/book", async (req, res) => {
+    console.log("[SERVER] Received booking notification request at /api/book");
     try {
       const { booking } = req.body;
       if (!booking) {
+        console.error("[SERVER] Booking payload is empty in request body");
         return res.status(400).json({ error: "Booking details are required" });
       }
+
+      console.log(`[SERVER] Processing booking ID: ${booking.id} for Patient: ${booking.patientName}`);
 
       const resendApiKey = process.env.RESEND_API_KEY;
       const adminEmail = process.env.ADMIN_RECEIVER_EMAIL;
 
       if (!resendApiKey) {
-        console.warn("RESEND_API_KEY environment variable is not defined on the server side.");
+        console.warn("[SERVER] RESEND_API_KEY is missing on the server side.");
         return res.json({
           success: true,
           status: "saved_locally_only",
-          message: "Note: Booking was saved locally, but no booking email was sent as RESEND_API_KEY is not set."
+          message: "Note: Booking was saved locally, but no booking email was sent as RESEND_API_KEY is not set in the environment variables."
         });
       }
 
-      const resend = new Resend(resendApiKey);
+      console.log(`[SERVER] Resend API Key is defined (starts with: ${resendApiKey.substring(0, 5)}...)`);
       const recipient = adminEmail || "cesaresmero2@gmail.com";
+      console.log(`[SERVER] Sending booking notification email to: ${recipient}`);
+
+      const resend = new Resend(resendApiKey);
       
       const formattedDate = new Date(booking.date).toLocaleDateString("en-GB", {
         weekday: "long",
@@ -92,7 +99,7 @@ async function startServer() {
                 </tr>
                 <tr>
                   <td style="padding: 12px; font-size: 13px; font-weight: bold; border-bottom: 1px solid #e2e8f0; color: #475569;">Preferred Hours:</td>
-                  <td style="padding: 12px; font-size: 13px; border-bottom: 1px solid #e2e8f0; color: #0f172a;">${booking.timeSlot}</td>
+                  <td style="padding: 12px; font-size: 13px; border-bottom: 1px solid #0f172a;">${booking.timeSlot}</td>
                 </tr>
                 <tr style="background-color: #FCFAF5;">
                   <td style="padding: 12px; font-size: 13px; font-weight: bold; color: #475569; vertical-align: top;">Target Concerns:</td>
@@ -101,8 +108,8 @@ async function startServer() {
               </tbody>
             </table>
 
-            <div style="background-color: #6b7152/10; border-left: 3px solid #4a7c7c; padding: 12px; margin-bottom: 24px; border-radius: 4px;">
-              <p style="margin: 0; font-size: 12px; color: #475569; line-height: 1.5;">
+            <div style="background-color: #6b7152; padding: 12px; margin-bottom: 24px; border-radius: 4px;">
+              <p style="margin: 0; font-size: 12px; color: #ffffff; line-height: 1.5;">
                 <strong>Next Step:</strong> Review this schedule. You can easily click the client's email or phone number above to reach out for confirmation or consultation notes.
               </p>
             </div>
@@ -113,6 +120,13 @@ async function startServer() {
           </div>
         `
       });
+
+      console.log("[SERVER] Resend Email API response:", JSON.stringify(adminEmailResponse));
+
+      if (adminEmailResponse && adminEmailResponse.error) {
+        console.error("[SERVER] Resend returned an explicit API error:", adminEmailResponse.error);
+        return res.status(400).json({ error: adminEmailResponse.error.message || "Resend API returned an error." });
+      }
 
       return res.json({
         success: true,
